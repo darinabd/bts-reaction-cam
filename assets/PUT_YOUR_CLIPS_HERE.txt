@@ -1,0 +1,11 @@
+Put your own BTS memes here. Examples:
+  smile.mp4
+  surprise.mp4
+  wink.gif
+  thumbs_up.mp4
+  victory.mp4
+  open_palm.mp4
+  love.mp4
+
+The app also works without these files: it shows a styled placeholder reaction.
+
