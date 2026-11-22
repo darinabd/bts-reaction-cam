@@ -408,16 +408,6 @@ BTS imagery and other third-party content belong to their respective rights hold
 
 **Darina Burnasheva**
 
-Software Development Student  
-Kyungbok University, South Korea
-
-Interested in:
-
-- Artificial Intelligence
-- Machine Learning
-- Computer Vision
-- Python Development
-- Interactive Applications
 
 **GitHub:** [@darinabd](https://github.com/darinabd)
 
