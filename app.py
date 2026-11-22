@@ -1,9 +1,3 @@
-"""BTS Reaction Cam: personalized 1-to-1 pose/expression per meme.
-
-Run `python app.py --train` to record the 29 triggers, then `python app.py`.
-`--demo` retains the original simple 7-reaction keyboard test.
-"""
-
 from __future__ import annotations
 
 import argparse
