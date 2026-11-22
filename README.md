@@ -1,169 +1,436 @@
-# BTS Reaction Cam 💜 — 29 personalised memes
+<div align="center">
 
-Мини-приложение на Python: **каждой из 29 BTS-фотографий соответствует своя
-мимика или поза**. Ты один раз учишь программу распознавать свой вариант
-выражения/позы, а затем показываешь его в камеру — появляется ровно тот мем,
-который с ним связан. Никакого случайного выбора в основном режиме.
+# 💜 BTS Reaction Cam
 
-Используются **OpenCV** (веб-камера и интерфейс) и **MediaPipe Tasks**
-(Face Landmarker + Gesture Recognizer + Pose Landmarker). YOLO не нужен.
-Выражения лица определяются по форме лица, а не по реальным эмоциям человека.
+### Your Expressions. Your Reactions. Your BTS Memes.
 
-## 1. Запуск на MacBook
+**An interactive computer vision application that matches your facial expressions, hand gestures, and body poses with BTS reaction memes in real time.**
 
-Открой папку проекта в VS Code, затем терминал в этой папке:
+<br>
+
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![OpenCV](https://img.shields.io/badge/OpenCV-4.11-5C3EE8?style=for-the-badge&logo=opencv&logoColor=white)
+![MediaPipe](https://img.shields.io/badge/MediaPipe-0.10.21-00C4B4?style=for-the-badge)
+![NumPy](https://img.shields.io/badge/NumPy-1.x-013243?style=for-the-badge&logo=numpy&logoColor=white)
+
+<br>
+
+![Platform](https://img.shields.io/badge/Platform-macOS-lightgrey?style=flat-square&logo=apple)
+![Computer Vision](https://img.shields.io/badge/Computer_Vision-Real_Time-blueviolet?style=flat-square)
+![Status](https://img.shields.io/badge/Status-Prototype-success?style=flat-square)
+
+---
+
+**[Overview](#-overview) • [Features](#-features) • [How It Works](#-how-it-works) • [Installation](#-installation) • [Usage](#-usage) • [Tech Stack](#-tech-stack)**
+
+</div>
+
+<br>
+
+## ✨ Overview
+
+**BTS Reaction Cam** is an interactive Python application that transforms facial expressions and body movements into personalized BTS meme reactions.
+
+Using real-time computer vision, the application analyzes the user's facial movements, hand gestures, and body poses through a webcam.
+
+Each reaction is matched with a specific BTS meme from a personalized collection.
+
+Unlike traditional random meme generators, BTS Reaction Cam allows users to train individual reactions, creating a unique and interactive experience.
+
+### The Concept
+
+> Make a face. Strike a pose. Get a BTS reaction. 💜
+
+The application combines computer vision, facial landmark detection, and personalized gesture recognition to create a fun, interactive experience.
+
+<br>
+
+## 🎬 Demo
+
+The application displays two panels side by side:
+
+| Live Camera | BTS Reaction |
+|:---:|:---:|
+| Real-time webcam feed | Matched BTS meme |
+| Facial expression tracking | Personalized reaction |
+| Hand and pose recognition | Automatic meme selection |
+
+**Demo preview:** Coming soon.
+
+*A demonstration GIF or screenshot will be added in a future update.*
+
+<br>
+
+## 🚀 Features
+
+### 🎭 Facial Expression Recognition
+
+Detects facial movements using MediaPipe Face Landmarker.
+
+- Smiling
+- Surprised expressions
+- Raised eyebrows
+- Eye movements
+- Mouth movements
+- Other personalized facial expressions
+
+### ✋ Hand Gesture Detection
+
+Recognizes hand landmarks and gestures.
+
+- Peace signs
+- Thumbs up
+- Open palms
+- Hand movements
+- Custom gestures
+
+### 🧍 Body Pose Tracking
+
+Analyzes body landmarks to recognize movements and poses.
+
+- Arm positions
+- Upper-body movements
+- Shoulder positions
+- Personalized poses
+
+### 💜 Personalized BTS Meme Matching
+
+Each meme can have its own trained reaction.
+
+The application compares live webcam features with previously recorded samples to identify the closest match.
+
+### 🔄 Custom Reaction Training
+
+Users can:
+
+- Record their own expressions and poses.
+- Assign a unique reaction to each meme.
+- Retrain individual reactions.
+- Save calibration data locally.
+- Continue training in future sessions.
+
+### ⚡ Real-Time Processing
+
+The application processes webcam frames continuously and uses temporal stabilization to reduce accidental reaction switching.
+
+<br>
+
+## 🧠 How It Works
+
+The application follows a five-stage computer vision pipeline.
+
+```mermaid
+flowchart TD
+    A["📷 Webcam Input"] --> B["🔍 MediaPipe Detection"]
+    B --> C["🧠 Feature Extraction"]
+    C --> D["🎯 Reaction Matching"]
+    D --> E["💜 BTS Meme Display"]
+```
+
+### 1. Webcam Capture
+
+OpenCV captures real-time frames from the user's webcam.
+
+### 2. Landmark Detection
+
+MediaPipe extracts:
+
+- Facial blendshape scores
+- Hand landmarks
+- Body pose landmarks
+
+### 3. Feature Extraction
+
+Detected landmarks are converted into numerical feature vectors.
+
+### 4. Similarity Matching
+
+The application compares the current feature vector with stored user-trained samples.
+
+A similarity threshold helps reject uncertain matches.
+
+### 5. Reaction Display
+
+When a sufficiently confident reaction is detected, the corresponding BTS meme appears on screen.
+
+**Note:** The system recognizes visual patterns rather than determining a person's actual emotional state.
+
+<br>
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|:---|:---|
+| **Python 3.11** | Core application logic |
+| **OpenCV** | Webcam capture and image processing |
+| **MediaPipe Face Landmarker** | Facial expression features |
+| **MediaPipe Gesture Recognizer** | Hand gesture detection |
+| **MediaPipe Pose Landmarker** | Body pose tracking |
+| **NumPy** | Numerical feature processing |
+| **Pillow** | Image utilities |
+| **JSON** | Reaction configuration and calibration storage |
+
+The main personalized matching system uses MediaPipe rather than YOLO because it relies primarily on facial, hand, and body landmarks.
+
+<br>
+
+## 📦 Installation
+
+### Prerequisites
+
+- Python 3.11
+- macOS
+- Webcam
+- pip
+- Internet connection for the initial model download
+
+The project was developed for an Intel-based MacBook Air.
+
+### 1. Clone the Repository
 
 ```bash
-source .venv3/bin/activate
+git clone https://github.com/darinabd/bts-reaction-cam.git
+cd bts-reaction-cam
+```
+
+### 2. Create a Virtual Environment
+
+```bash
+python3.11 -m venv .venv
+```
+
+Activate it:
+
+```bash
+source .venv/bin/activate
+```
+
+### 3. Install Dependencies
+
+```bash
+python -m pip install --upgrade pip
 python -m pip install -r requirements.txt
+```
+
+### 4. Download MediaPipe Models
+
+```bash
 python setup_models.py
+```
+
+The application requires three MediaPipe models:
+
+- Face Landmarker
+- Gesture Recognizer
+- Pose Landmarker
+
+**macOS SSL troubleshooting**
+
+If Python reports a certificate verification error:
+
+```bash
+python -m pip install certifi
+```
+
+Then run:
+
+```bash
+SSL_CERT_FILE="$(python -m certifi)" python setup_models.py
+```
+
+This uses a trusted certificate bundle without disabling SSL verification.
+
+<br>
+
+## 🎮 Usage
+
+### Training Mode
+
+Start the training interface:
+
+```bash
 python app.py --train
+```
+
+The first training step records a neutral facial expression.
+
+Afterward, the application displays each meme and allows the user to record a corresponding expression or pose.
+
+| Key | Action |
+|:---:|:---|
+| `SPACE` | Record expression or pose |
+| `N` | Next meme |
+| `B` | Previous meme |
+| `Q` | Finish training |
+| `ESC` | Exit |
+
+Training samples are saved automatically.
+
+To replace an existing reaction, navigate to the corresponding meme and record a new sample.
+
+### Reaction Mode
+
+Start the main application:
+
+```bash
 python app.py
 ```
 
-Рекомендуется Python **3.11 или 3.12**. Первый запуск скачивает три официальные
-модели Google; последующие работают без интернета. macOS может запросить
-разрешение на веб-камеру для Terminal / VS Code — его нужно предоставить.
-Для остановки нажми **Q** или **Esc** в окне программы.
+The webcam begins analyzing expressions and gestures in real time.
 
-## 2. Обучение 29 индивидуальных реакций
+When a trained reaction is recognized, its corresponding meme is displayed.
 
-Запусти `python app.py --train`. Слева будет твоя камера, справа — очередной
-мем из папки `assets/collection/`.
+### Alternative Camera
 
-1. **Первая карточка — NEUTRAL.** Смотри в камеру с расслабленным лицом и
-   опущенными руками, нажми **Пробел** и удерживай позу около 1–2 секунд.
-2. Появится первый BTS-мем. Повтори выражение лица или придумай **отдельный,
-   узнаваемый жест**, подходящий к нему. Сверху будет краткая английская
-   подсказка из `pose_guides.json` — её можно изменить под себя.
-   Нажми **Пробел**, не двигайся до
-   завершения захвата 12 кадров.
-3. Программа автоматически перейдёт к следующей фотографии. Так повтори для
-   всех **29** изображений.
-4. Нажми **Q**. Твои данные уже сохраняются после каждой реакции в
-   `calibration.json`. Можно в любой момент вернуться командой
-   `python app.py --train` и дообучить пропущенные фотографии.
-5. Для обычного режима запусти `python app.py`.
+To select a different webcam:
 
-В обучении: **Space** — записать позу, **N** — следующая картинка,
-**B** — предыдущая, **Q** — выход. Чтобы переобучить одну картинку, вернись
-к ней клавишами B/N и запиши её ещё раз.
+```bash
+python app.py --camera 1
+```
 
-Важно: для похожих кадров выбирай **достаточно разные позы или мимику**.
-Например, открытый рот и поднятые руки, обе ладони у щёк, палец у губ,
-руки над головой, жест мира и т. д. Нельзя гарантировать надёжное распознавание
-29 похожих улыбок: программа будет пропускать сомнительные совпадения.
+### Demo Mode
 
-Она **не понимает автоматически**, какую мимику делает участник BTS на
-фотографии; ты сама показываешь образец для каждого мема. Предметы вроде
-стакана или телефона не распознаются как отдельные объекты.
-
-**Приватность:** программа обрабатывает камеру локально. В `calibration.json`
-сохраняются числовые признаки твоего лица и позы (не фотографии и не видео).
-Не выкладывай этот файл в GitHub и не отправляй посторонним.
-
-## 3. Старый демонстрационный режим
-
-Если загрузить модели пока не получается, можно сначала проверить окно и
-собственные файлы мемов вручную:
+A legacy demonstration mode is also available:
 
 ```bash
 python app.py --demo
 ```
 
-В demo-режиме клавиши **1–7** запускают семь старых категорий, **0** очищает выбор.
-Этот режим предназначен только для проверки интерфейса; он не использует
-индивидуальное соответствие 29 фото. Он всё ещё
-использует камеру, но не требует моделей MediaPipe. При необходимости вместо
-обычной команды установки достаточно установить `opencv-python numpy Pillow`.
+This mode provides keyboard-controlled reaction previews and does not use the personalized 29-meme matching system.
 
-## 4. Старые категории (только demo)
+<br>
 
-| Реакция | Как вызвать | Название файла в папке `assets/` |
-| --- | --- | --- |
-| Улыбка | Широко улыбнись | `smile.mp4` |
-| Удивление | Открой рот и приподними брови | `surprise.mp4` |
-| Подмигивание | Подмигни одним глазом | `wink.mp4` |
-| Палец вверх | 👍 | `thumbs_up.mp4` |
-| Знак мира | ✌️ | `victory.mp4` |
-| Открытая ладонь | ✋ | `open_palm.mp4` |
-| I love you | 🤟 | `love.mp4` |
-
-Поддерживаются файлы **MP4, MOV, GIF, PNG, JPG**. Название файла должно быть
-таким, как в таблице. Вместо видео можно положить картинку или GIF:
-`victory.gif`, `smile.jpg` и т. п. При нескольких форматах с одинаковым именем
-приоритет у MP4, затем MOV, GIF, PNG, JPG.
-
-В текущей версии сначала используется подборка из `reactions.json`. Отдельный
-файл `assets/smile.mp4` станет запасным вариантом, если для реакции `smile`
-в подборке нет доступных файлов. Чтобы включить свои видео в случайный выбор,
-помести их в `assets/collection/` и добавь их имена в `reactions.json`.
-
-### Твоя подборка из 29 BTS-мемов уже подключена 💜
-
-В `assets/collection/` находятся все 29 JPG из твоего архива: Джин, Юнги,
-Хосок, Намджун, Чимин, Тэхён и Чонгук. **В основном режиме у каждой фото
-собственный триггер**, который ты записываешь в обучении. Файл `reactions.json`
-и случайный выбор используются только в старом `--demo` режиме.
-
-В `--demo` старые категории всё ещё могут показывать несколько разных фото.
-В обычном режиме `python app.py` одно распознанное движение соответствует
-**одному конкретному имени JPG** из сохранённого обучения.
-
-Это **JPG-фотографии, не видео**: они будут появляться как статичные мемы.
-Позже можно добавить MP4/GIF. Если файл для реакции не найден, вместо него
-показывается цветная карточка-заглушка. Перед публичной публикацией проекта
-проверь права на использованные изображения и видео.
-
-## 5. Если распознавание работает нестабильно
-
-- Убедись, что лицо и кисти видны, особенно при слабом освещении.
-- Реакция подтверждается четырьмя кадрами и удерживается минимум 2 секунды.
-- Если два образца получились слишком похожими, переобучи их и добавь
-  заметно разные движения рук или мимику.
-- В `pose_matcher.py` можно изменить порог схожести (по умолчанию 0.18).
-- Жест «сердечко пальцами» может сработать, если обучить его как отдельную
-  позу с хорошим освещением, но это не гарантируется для разных ракурсов.
-- Попробуй другую камеру: `python app.py --camera 1`.
-
-## 6. Структура проекта
+## 📂 Project Structure
 
 ```text
 bts-reaction-cam/
-├── app.py               # Камера, интерфейс и основная петля
-├── recognition.py       # Правила распознавания + стабилизация
-├── media.py             # Проигрывание MP4/GIF/изображений
-├── personal_cam.py      # Обучение и запуск 29 индивидуальных реакций
-├── pose_matcher.py      # Признаки лица, рук и тела + сравнение
-├── pose_guides.json     # Подсказки к каждой из 29 фотографий
-├── catalog.py           # Случайный выбор, только demo
-├── reactions.json       # Категории, только demo
-├── setup_models.py      # Загрузка официальных моделей Google
+│
+├── app.py
+├── personal_cam.py
+├── pose_matcher.py
+├── recognition.py
+├── catalog.py
+├── media.py
+│
+├── setup_models.py
 ├── requirements.txt
-├── assets/collection/    # 29 выбранных тобой BTS-мемов
-├── models/               # Скачанные модели, не отправлять в GitHub
-├── calibration.json      # Создаётся у тебя после обучения; приватный файл
-└── tests/                # Модульные тесты
+├── README.md
+├── .gitignore
+│
+├── pose_guides.json
+├── reactions.json
+│
+├── assets/
+│   └── collection/
+│
+├── models/
+│
+└── tests/
+    ├── test_catalog.py
+    ├── test_pose_guides.py
+    ├── test_pose_matcher.py
+    └── test_recognition.py
 ```
 
-Проверка логики без веб-камеры:
+<br>
+
+## 🧪 Testing
+
+Run the automated unit tests:
 
 ```bash
 python -m unittest discover -s tests -v
 ```
 
-### Что можно улучшить во второй версии
+The test suite covers:
 
-- Добавить подсказки по позам прямо поверх камеры.
-- Сделать пользовательские наборы мемов для каждого участника BTS.
-- Добавить запись собственного видео с реакциями.
-- Создать красивый интерфейс на PySide6 с переключателями.
-- Подключить виртуальную камеру для использования в Zoom (это отдельная задача).
+- Reaction classification
+- Gesture priority
+- Pose feature extraction
+- Personalized reaction matching
+- Reaction stabilization
+- Meme catalog behavior
 
-### Ссылки на документацию
+**Important:** The original tests expect the personal meme collection to be available. Tests involving those assets may fail in a clean public clone until asset-independent test fixtures are added.
 
-- [Google MediaPipe Face Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/face_landmarker?tab=Python)
-- [Google MediaPipe Gesture Recognizer](https://developers.google.com/edge/mediapipe/solutions/vision/gesture_recognizer?tab=Python)
-- [Google MediaPipe Pose Landmarker](https://developers.google.com/edge/mediapipe/solutions/vision/pose_landmarker?tab=Python)
-- [OpenCV: Getting Started with Videos](https://docs.opencv.org/4.11.0/dd/d43/tutorial_py_video_display.html)
+Webcam and graphical interface functionality should also be tested manually on a compatible Mac.
 
+<br>
+
+## 🔐 Privacy
+
+BTS Reaction Cam is designed to process webcam input locally.
+
+- No account is required.
+- Webcam footage is not uploaded.
+- Training data remains on the user's computer.
+- Personal calibration files are excluded from Git.
+- MediaPipe model binaries are downloaded separately.
+
+The generated `calibration.json` contains numerical features derived from facial expressions and poses.
+
+**Do not upload personal calibration files to public repositories.**
+
+<br>
+
+## 📸 Media & Copyright
+
+The original project uses a personal collection of 29 BTS reaction images.
+
+These images are intentionally excluded from the public GitHub repository.
+
+Users must provide their own legally usable images in:
+
+```text
+assets/collection/
+```
+
+The configuration files reference the filenames used in the original collection. Users may adjust these mappings to work with their own images.
+
+BTS imagery and other third-party content belong to their respective rights holders.
+
+<br>
+
+## 🔮 Future Improvements
+
+- [ ] Improved recognition accuracy
+- [ ] Multiple training samples per reaction
+- [ ] Interactive reaction library
+- [ ] Video memes with synchronized audio
+- [ ] Improved graphical interface
+- [ ] Reaction recording
+- [ ] Additional customization options
+- [ ] Cross-platform support
+
+<br>
+
+## 👩🏻‍💻 Developer
+
+**Darina Burnasheva**
+
+Software Development Student  
+Kyungbok University, South Korea
+
+Interested in:
+
+- Artificial Intelligence
+- Machine Learning
+- Computer Vision
+- Python Development
+- Interactive Applications
+
+**GitHub:** [@darinabd](https://github.com/darinabd)
+
+<br>
+
+---
+
+<div align="center">
+
+### 💜 Made with Python, Computer Vision & a little BTS chaos.
+
+*An experimental project combining technology, creativity, and fandom.*
+
+**If you enjoyed this project, consider giving it a ⭐!**
+
+</div>
